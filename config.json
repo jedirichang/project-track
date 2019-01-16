@@ -1,0 +1,38 @@
+{
+    "db":"mongodb://localhost:27017/project-track",
+    "secret": "tootime",
+     "base_url": "http://localhost:3000",
+     "twillio": {
+         "twilio_accountSid": "AC681b10b15ae74540d8e7edb7b8090341",
+         "twilio_authToken": "d4d0d315a3b0b1e6084ab7799e990110",
+         "twilio_number": "+14 242772394"
+     },
+     "SendGrid": {
+         "SendGrid_host": "smtp.sendgrid.net",
+         "SENDGRID_API_KEY": "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",
+         "SendGrid_auth": {
+             "SendGrid_user": "ksipusa",
+             "SendGrid_pass": "Hillwoodd123"
+         }
+     },
+     "AWSIAMUSER": "ses-smtp-user.20180717-143510",
+     "AWSEmail": {
+         "host": "email-smtp.us-west-2.amazonaws.com",
+         "port": 587,
+         "secure": false,
+         "auth": {
+             "user": "AKIAJWEWRUP6UJ2X54EA",
+             "pass": "AsTkQlTLy1i4WbU8Ghxl4J2gpxGLxsBk8sCjiB6wP2LZ"
+         }
+     },
+     "emailCredentials": {
+         "From": "KSIP <ksip@help.in>",
+         "signature": "KSIP ",
+         "particularSignature": "Best, \nKSIP Team ",
+         "devTeamSignature": ""
+     },
+     "appName": "Ak Sales",
+     "emailVerificationLink": "http://18.195.179.6/admin/verify",
+     "passwordResetLink": "http://18.218.193.73:3000/#/",
+     "serverKey": "AAAAP6zmlyQ:APA91bEXvmrzqGqdxnf00JXqvZmCxcPPq8OXXDP8_tgdWxG63NGrvyuGxRXrlP0v-bKpE1brQAZIGJm1nn6Ls2Ptj8MHLXAs_23zcLjJoe9AI0B2ibOzKtbaAP8MpIfdNud5g26FIEGv"
+}

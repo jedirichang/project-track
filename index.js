@@ -4,8 +4,8 @@ const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-// config = require('./config.json');
-// var indexRouter = require('./routes/index');
+config = require('./config.json');
+var indexRouter = require('./routes/index');
 
 app.use(cors());
 app.use(bodyparser.urlencoded({

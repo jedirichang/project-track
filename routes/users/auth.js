@@ -5,4 +5,7 @@ const userAuthController=require('../../controllers/users/auth');
 router.route('/signup')
       .post(userAuthController.signup);
 
-exports.Router = router;
+router.route('/login')
+      .post(userAuthController.login)
+
+exports.Router = router; 

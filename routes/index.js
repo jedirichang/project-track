@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const userAuth=require('./users/auth').Router;
+const userAuthMiddleware=require('../middlewares/userAuth');
+const attachCollections=require('../middlewares/attachCollections');
 
-router.use('user/auth',userAuth);
+const userAuthRoute=require('./users/auth').Router;
+const userRoute=require('./users').Router;
+
+
+router.use('/user/auth',attachCollections,userAuthRoute);
+router.use('/user',attachCollections,userRoute);
+
+module.exports = router;
