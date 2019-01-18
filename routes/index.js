@@ -9,6 +9,6 @@ const userRoute=require('./users').Router;
 
 
 router.use('/user/auth',attachCollections,userAuthRoute);
-router.use('/user',attachCollections,userRoute);
+router.use('/user',attachCollections,userAuthMiddleware,userRoute);
 
 module.exports = router;
