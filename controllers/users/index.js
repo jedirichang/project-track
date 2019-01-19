@@ -113,8 +113,8 @@ exports.pauseTask = async (req, res) => {
         let taskid = req.params.taskid;
         let task = await TaskModel.findById(taskid);
 
-        if(task.is_completed)
-            return responses.sendErrorMessage(res,'Task Already Completed');
+        if (task.is_completed)
+            return responses.sendErrorMessage(res, 'Task Already Completed');
 
         if (task.is_paused)
             return responses.sendErrorMessage(res, 'Task Already Paused');
@@ -148,8 +148,8 @@ exports.resumeTask = async (req, res) => {
         let taskid = req.params.taskid;
         let task = await TaskModel.findById(taskid);
 
-        if(task.is_completed)
-        return responses.sendErrorMessage(res,'Task Already Completed');
+        if (task.is_completed)
+            return responses.sendErrorMessage(res, 'Task Already Completed');
 
         if (!task.is_paused)
             return responses.sendErrorMessage(res, 'Task Already running');
@@ -174,8 +174,8 @@ exports.stopTask = async (req, res) => {
         let taskid = req.params.taskid;
         let task = await TaskModel.findById(taskid);
 
-        if(task.is_completed)
-        return responses.sendErrorMessage(res,'Task Already Completed');
+        if (task.is_completed)
+            return responses.sendErrorMessage(res, 'Task Already Completed');
 
         if (task.is_completed)
             return responses.sendErrorMessage(res, 'Task Already Completed');
@@ -205,5 +205,86 @@ exports.stopTask = async (req, res) => {
     } catch (e) {
         console.log(e)
         responses.sendErrorMessage(res, 'Something went wrong');
+    }
+}
+
+exports.getRecipients = async (req, res) => {
+    try {
+        let RecipientModel = req.RecipientsModel;
+
+        let recipients = await RecipientModel.find();
+
+        responses.success(res, 'Successfully fetched recipients', recipients);
+    } catch (e) {
+        console.log(e);
+        responses.sendErrorMessage(res, 'Error while fetching recipients')
+    }
+}
+
+exports.createRecipient = async (req, res) => {
+    try {
+        let RecipientModel = req.RecipientsModel;
+
+        let recipient = req.body;
+
+        recipient = await RecipientModel.create(recipient);
+        responses.success(res, 'Successfully Created Recipient', recipient);
+    } catch (e) {
+        console.log(e);
+        responses.sendErrorMessage(res, 'Error while creating recipient');
+    }
+}
+
+exports.updateRecipient = async (req, res) => {
+    try {
+        let RecipientModel = req.RecipientsModel;
+        let recipientid = req.params.recipientid;
+        let updateQuery = req.body;
+
+        let recipient = await RecipientModel.findByIdAndUpdate(recipientid, {
+            $set: updateQuery
+        });
+        responses.success(res, 'Successfully Created Recipient', recipient);
+    } catch (e) {
+        console.log(e);
+        responses.sendErrorMessage(res, 'Error while creating recipient');
+    }
+}
+
+exports.updateProject = async (req, res) => {
+    try {
+        let ProjectModel = req.ProjectModel;
+        let updateQuery = req.body;
+        let projectid = req.params.projectid;
+
+         await ProjectModel.findByIdAndUpdate(projectid, {
+            $set: updateQuery
+        });
+
+        responses.success(res, 'Successfully Updated the project', ProjectModel);
+    } catch (e) {
+        console.log(e);
+        responses.sendErrorMessage(res, 'Error while updating the project');
+    }
+}
+
+exports.pushRecipientToProject =async (req, res) => {
+    try {
+        let ProjectModel = req.ProjectModel;
+        let newRecipients = req.body.newRecipients;
+        let projectid = req.params.projectid;
+
+        let project = await ProjectModel.findByIdAndUpdate(projectid, {
+            $push: {
+                "recipients": {
+                    $each: newRecipients
+                }
+            }
+        });
+
+        responses.success(res, 'Successfully Updated the project', project);
+    } catch (e) {
+        console.log(e);
+        responses.sendErrorMessage(res, 'Error while updating the project');
     }
 }

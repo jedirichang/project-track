@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-let project = new Schema({
+let recipients = new Schema({
     name: String,
-    recipients: []
+    email:String
 }, {
     timestamps: true
 });
-module.exports = mongoose.model('Projects', project);
+module.exports = mongoose.model('Recipients', recipients);

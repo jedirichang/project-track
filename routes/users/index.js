@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userController=require('../../controllers/users');
+const userController = require('../../controllers/users');
 
 router.route('/project')
       .post(userController.createProject)
@@ -25,8 +25,20 @@ router.route('/task/:taskid/pause')
 router.route('/task/:taskid/resume')
       .post(userController.resumeTask);
 
-      router.route('/task/:taskid/stop')
+router.route('/task/:taskid/stop')
       .post(userController.stopTask);
 
+router.route('/recipient')
+      .get(userController.getRecipients)
+      .post(userController.createRecipient)
 
-exports.Router = router; 
+router.route('/update/recipient/:recipientid')
+      .put(userController.updateRecipient)
+
+router.route('/update/project/:projectid')
+      .put(userController.updateProject);
+
+router.route('/update/project/pushRecipient/:projectid')
+      .put(userController.pushRecipientToProject);
+
+exports.Router = router;
